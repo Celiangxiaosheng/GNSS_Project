@@ -1,0 +1,47 @@
+﻿<Window x:Class="GNSS_Project.TroposphericDelayCoorection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GNSS_Project"
+        mc:Ignorable="d"
+        Title="TroposphericDelayCoorection" Height="350" Width="500"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="dgCell" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="500*"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="open" Click="Open"/>
+                <MenuItem Header="save"/>
+                <MenuItem Header="outReport"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Calculate">
+                <MenuItem Header="对流层改正计算"/>
+            </MenuItem>
+        </Menu>
+        <TabControl TabStripPlacement="Bottom" Grid.Row="1" Margin="0,0,0,5">
+            <TabItem Header="数据" >
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Troplist}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="测站名" MinWidth="30" Binding="{Binding Name}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="时间(YYYYMMDD)" MinWidth="100" Binding="{Binding Time}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="经度(°)" MinWidth="30" Binding="{Binding _L}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="纬度(°)" MinWidth="30" Binding="{Binding _B}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="大地高(m)" MinWidth="30" Binding="{Binding _H}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="高度角(°)" MinWidth="30" Binding="{Binding Zeta}" ElementStyle="{StaticResource dgCell}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="计算结果"></TabItem>
+        </TabControl>
+    </Grid>
+</Window>

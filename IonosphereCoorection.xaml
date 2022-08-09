@@ -1,0 +1,47 @@
+﻿<Window x:Class="GNSS_Project.IonosphereCoorection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GNSS_Project"
+        mc:Ignorable="d"
+        Title="IonosphereCoorection" Height="350" Width="500"
+        WindowStyle="SingleBorderWindow" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style x:Key="dgCell" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="500*"/>
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="File">
+                <MenuItem Header="open" Click ="Open"/>
+                <MenuItem Header="save"/>
+                <MenuItem Header="outReport"/>
+                <MenuItem Header="Exit" Click="Exit"/>
+            </MenuItem>
+            <MenuItem Header="Calculate">
+                <MenuItem Header="电离层改正计算" Click="Calculate"/>
+            </MenuItem>
+        </Menu>
+        <TabControl TabStripPlacement="Bottom" Grid.Row="1" Margin="0,0,0,5">
+            <TabItem Header="数据" >
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Pointlist}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="卫星标识" MinWidth="80" Binding="{Binding SatalliteName}" ElementStyle="{StaticResource dgCell}"/>
+                        <DataGridTextColumn Header="x坐标分量(km)" MinWidth="100" Binding="{Binding _x}" ElementStyle="{StaticResource dgCell}" />
+                        <DataGridTextColumn Header="y坐标分量(km)" MinWidth="100" Binding="{Binding _y}" ElementStyle="{StaticResource dgCell}" />
+                        <DataGridTextColumn Header="z坐标分量(km)" MinWidth="100" Binding="{Binding _z}" ElementStyle="{StaticResource dgCell}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="计算结果">
+                <TextBlock x:Name="Result" Margin="1,1,1,1"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
